@@ -1,7 +1,10 @@
 from django.db import models
 
 class Author(models.Model):
-    author_name = models.CharField(max_length=100,help_text='Enter the author name')
+    author_name = models.CharField(max_length=100,help_text='Enter the author name',verbose_name='author')
+
+    class Meta:
+        verbose_name_plural = 'author'
 
     def __str__(self):
         return self.author_name
