@@ -12,8 +12,8 @@ class AuthorAdminForm(forms.ModelForm):
         author = self.cleaned_data.get('author_name')
         if len(author) < 4:
             raise forms.ValidationError('Please enter a valid name,name cannot be less than 4 characters', code = 'invalid')
-
         return self.cleaned.data
+
     def save(self, commit=True):
         return super(AuthorAdminForm, self).save(commit=commit)
 
@@ -26,7 +26,7 @@ class MemberAdminForm(forms.ModelForm):
         if len(str(phoneno)) != 10:
             raise forms.ValidationError('Please enter a valid phone number', code='invalid')
 
-        return self.cleaned.data
+        return self.cleaned_data
 
     def save(self, commit=True):
         return super(MemberAdminForm, self).save(commit=commit)
@@ -42,6 +42,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_filter = ('category_name',)
 
 class AuthorAdmin(admin.ModelAdmin):
+    list_display = ('author_name',)
     search_fields = ('author_name',)
     ordering = ('author_name',)
     form = AuthorAdminForm
@@ -53,5 +54,5 @@ class MemberAdmin(admin.ModelAdmin):
 admin.site.register(Book, BookAdmin)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Member,MemberAdmin)
+admin.site.register(Member, MemberAdmin)
 admin.site.register(Record)
